@@ -1,0 +1,367 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Japanese resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menubar
+//
+
+IDR_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open ROM...\tCtrl + O",      IDM_FILE_OPEN
+        MENUITEM "&Close ROM",                  IDM_FILE_CLOSE
+        MENUITEM "ROM &Info...",                IDM_FILE_ROMINFO
+        MENUITEM SEPARATOR
+        MENUITEM "&Reset\tCtrl + R",            IDM_FILE_RESET
+        MENUITEM "R&esume\tShift + ESC",        IDM_FILE_RESUME
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tCtrl + Q",             IDM_FILE_EXIT
+    END
+    POPUP "&State"
+    BEGIN
+        MENUITEM "Save &State...\tCtrl + S",    IDM_FILE_SAVE_STATE
+        MENUITEM "Load S&tate...\tCtrl + L",    IDM_FILE_LOAD_STATE
+        MENUITEM SEPARATOR
+        MENUITEM "&Quick Save\tShift + S",      IDM_FILE_QUICK_SAVE
+        MENUITEM "Q&uick Load\tShift + L",      IDM_FILE_QUICK_LOAD
+        POPUP "Savestate S&lot"
+        BEGIN
+            MENUITEM "# 0",                         IDM_FILE_SLOT_0
+            MENUITEM "# 1",                         IDM_FILE_SLOT_1
+            MENUITEM "# 2",                         IDM_FILE_SLOT_2
+            MENUITEM "# 3",                         IDM_FILE_SLOT_3
+            MENUITEM "# 4",                         IDM_FILE_SLOT_4
+            MENUITEM "# 5",                         IDM_FILE_SLOT_5
+            MENUITEM "# 6",                         IDM_FILE_SLOT_6
+            MENUITEM "# 7",                         IDM_FILE_SLOT_7
+            MENUITEM "# 8",                         IDM_FILE_SLOT_8
+            MENUITEM "# 9",                         IDM_FILE_SLOT_9
+        END
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Preferences...",             IDM_OPTIONS_PREFERENCES
+        MENUITEM "&Graphics...",                IDM_OPTIONS_GRAPHICS
+        MENUITEM "&Sound...",                   IDM_OPTIONS_SOUND
+        MENUITEM "&Controllers...",             IDM_OPTIONS_CONTROLLERS
+        MENUITEM "&Directory...",               IDM_OPTIONS_DIRECTORY
+        MENUITEM SEPARATOR
+        MENUITEM "Turbo &A",                    IDM_OPTIONS_TURBO_A
+        MENUITEM "Turbo &B",                    IDM_OPTIONS_TURBO_B
+        MENUITEM SEPARATOR
+        MENUITEM "Hide Task Bar",               IDM_OPTIONS_HIDE_TASKBAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   IDM_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_HELP_ABOUT DIALOGEX 0, 0, 139, 71
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE 0x80000000L
+CAPTION "about nester for HPC"
+FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+BEGIN
+    ICON            IDI_NESTERICON,IDC_STATIC,10,17,20,20
+    LTEXT           "nester for HPC\npublic beta 2 Release 2\n\nbased on nester public bata4\n(C) 2000 Darren Ranalli",
+                    IDC_STATIC,32,17,90,47
+END
+
+IDD_OPTIONS_DIRECTORY DIALOG DISCARDABLE  0, 0, 271, 101
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE 0x80000000L
+CAPTION "Directory"
+FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+BEGIN
+    CONTROL         "relative to directory ROM was loaded from",
+                    IDC_RADIO_SRAM_ROMDIRECTORY,"Button",BS_AUTORADIOBUTTON | 
+                    BS_MULTILINE | WS_GROUP,10,19,116,19
+    CONTROL         "relative to nester",IDC_RADIO_SRAM_NESTERDIRECTORY,
+                    "Button",BS_AUTORADIOBUTTON,10,43,116,10
+    EDITTEXT        IDC_EDIT_SRAM,10,58,116,14,ES_AUTOHSCROLL
+    GROUPBOX        "Battery-backed Save RAM Directory",IDC_STATIC,4,7,128,
+                    71
+    CONTROL         "relative to directory ROM was loaded from",
+                    IDC_RADIO_SAVESTATE_ROMDIRECTORY,"Button",
+                    BS_AUTORADIOBUTTON | BS_MULTILINE | WS_GROUP,145,19,116,
+                    19
+    CONTROL         "relative to nester",IDC_RADIO_SAVESTATE_NESTERDIRECTORY,
+                    "Button",BS_AUTORADIOBUTTON,145,43,116,10
+    EDITTEXT        IDC_EDIT_SAVESTATE,145,57,116,14,ES_AUTOHSCROLL
+    GROUPBOX        "Savestate Directory",IDC_STATIC,139,7,128,72
+    PUSHBUTTON      "Set &Default",IDC_DEFAULTS,217,83,50,14
+END
+
+IDD_OPTIONS_GRAPHICS DIALOG DISCARDABLE  0, 0, 271, 97
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE 0x80000000L
+CAPTION "Graphics"
+FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+BEGIN
+    CONTROL         "&Show more than 8 sprites per line",
+                    IDC_CHECK_SHOWSPRITES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,10,115,10
+    CONTROL         "Show &all 240 scanlines",IDC_CHECK_SHOWALLSCANLINES,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,26,115,10
+    CONTROL         "&Black and white mode",IDC_CHECK_BLACKANDWHITE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,56,81,10
+    CONTROL         "&Calculate palette",IDC_CHECK_CALCPALETTE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,72,66,10
+    LTEXT           "&Tint : ",IDC_STATIC,108,55,18,8
+    CONTROL         "Slider2",IDC_SLIDER_TINT,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,129,51,88,17
+    LTEXT           "&Hue : ",IDC_STATIC,108,75,18,8
+    CONTROL         "Slider2",IDC_SLIDER_HUE,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,129,73,88,17
+    PUSHBUTTON      "&Reset",IDC_RESET,221,71,34,14
+    GROUPBOX        "Palette",IDC_STATIC,7,41,256,53
+    PUSHBUTTON      "Set &Default",IDC_DEFAULTS,211,25,50,14
+END
+
+IDD_OPTIONS_KEYPRESS DIALOG DISCARDABLE  0, 0, 66, 52
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP
+FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+BEGIN
+    LTEXT           "Press key",IDC_STATIC,14,23,37,8
+END
+
+IDD_OPTIONS_PREFERENCES DIALOG DISCARDABLE  0, 0, 271, 97
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE 0x80000000L
+CAPTION "Preferences"
+FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+BEGIN
+    PUSHBUTTON      "&Associate .NES files with nester",IDC_ASSOCIATE,7,7,
+                    121,14
+    PUSHBUTTON      "&Undo",IDC_UNDO,7,24,50,14
+    PUSHBUTTON      "Set &Default",IDC_DEFAULTS,7,41,50,14
+    CONTROL         "&Speed throttling (60Hz)",IDC_CHECK_SPEEDTHROTTLE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,139,7,83,10
+    CONTROL         "Auto-&Frame skip",IDC_RADIO_AUTOFRAMESKIP,"Button",
+                    BS_AUTORADIOBUTTON,149,23,80,10
+    CONTROL         "s&kip ",IDC_RADIO_FRAMESKIP,"Button",BS_AUTORADIOBUTTON,
+                    149,39,30,10
+    COMBOBOX        IDC_COMBO_FRAMESKIP,187,39,38,116,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "frames",IDC_STATIC,229,41,21,10
+    LTEXT           "&Thread Priority : ",IDC_STATIC,139,63,50,8
+    COMBOBOX        IDC_COMBO_THREADPRIORITY,197,63,48,67,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_OPTIONS_SOUND DIALOG DISCARDABLE  0, 0, 271, 97
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE 0x80000000L
+CAPTION "Sound"
+FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+BEGIN
+    CONTROL         "&Enable sound",IDC_CHECK_SOUNDENABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,10,55,10
+    LTEXT           "Sample &Rate : ",IDC_STATIC,7,26,44,8
+    COMBOBOX        IDC_COMBO_SAMPLERATE,54,24,48,104,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Sample &Size : ",IDC_STATIC,7,41,42,8
+    COMBOBOX        IDC_COMBO_SAMPLESIZE,54,39,48,132,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Filter : ",IDC_STATIC,7,56,22,8
+    COMBOBOX        IDC_COMBO_FILTER,54,54,75,94,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Buffer Length : ",IDC_STATIC,6,71,47,8
+    COMBOBOX        IDC_COMBO_BUFFERLENGTH,54,69,48,103,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "frames",IDC_STATIC,107,72,22,8
+    CONTROL         "Rectangle&1",IDC_CHECK_RECTANGLE1,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,145,20,49,10
+    CONTROL         "Rectangle&2",IDC_CHECK_RECTANGLE2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,204,20,49,10
+    CONTROL         "&Triangle",IDC_CHECK_TRIANGLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,145,34,39,10
+    CONTROL         "&Noise",IDC_CHECK_NOISE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,204,34,33,10
+    CONTROL         "D&PCM",IDC_CHECK_DPCM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,145,48,34,10
+    CONTROL         "E&xternal",IDC_CHECK_EXTERNAL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,204,48,40,10
+    GROUPBOX        "Channels",IDC_STATIC,139,7,124,58
+    PUSHBUTTON      "Set &Default",IDC_DEFAULTS,212,72,50,14
+END
+
+IDD_OPTIONS_CONTROLLERS DIALOG DISCARDABLE  0, 0, 271, 101
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE 0x80000000L
+CAPTION "Controllers"
+FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+BEGIN
+    LTEXT           "A : ",IDC_STATIC,9,12,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_A,42,11,27,8
+    PUSHBUTTON      "...",IDC_A,73,8,25,14
+    PUSHBUTTON      "Del",IDC_DEL_A,104,8,25,14
+    LTEXT           "B : ",IDC_STATIC,9,29,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_B,42,29,27,8
+    PUSHBUTTON      "...",IDC_B,73,26,25,14
+    PUSHBUTTON      "Del",IDC_DEL_B,104,26,25,14
+    LTEXT           "Select : ",IDC_STATIC,9,47,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_SELECT,42,47,27,8
+    PUSHBUTTON      "...",IDC_SELECT,73,44,25,14
+    PUSHBUTTON      "Del",IDC_DEL_SELECT,104,44,25,14
+    LTEXT           "Start : ",IDC_STATIC,9,65,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_START,42,65,27,8
+    PUSHBUTTON      "...",IDC_START,73,62,25,14
+    PUSHBUTTON      "Del",IDC_DEL_START,104,62,25,14
+    LTEXT           "Up : ",IDC_STATIC,138,11,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_UP,171,11,27,8
+    PUSHBUTTON      "...",IDC_UP,202,8,25,14
+    PUSHBUTTON      "Del",IDC_DEL_UP,233,8,25,14
+    LTEXT           "Down : ",IDC_STATIC,138,29,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_DOWN,171,29,27,8
+    PUSHBUTTON      "...",IDC_DOWN,202,26,25,14
+    PUSHBUTTON      "Del",IDC_DEL_DOWN,233,26,25,14
+    LTEXT           "Left : ",IDC_STATIC,138,47,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_LEFT,171,47,27,8
+    PUSHBUTTON      "...",IDC_LEFT,202,44,25,14
+    PUSHBUTTON      "Del",IDC_DEL_LEFT,233,44,25,14
+    LTEXT           "Right : ",IDC_STATIC,138,65,25,8
+    LTEXT           "0xFF",IDC_STATIC_KEY_RIGHT,171,65,27,8
+    PUSHBUTTON      "...",IDC_RIGHT,202,62,25,14
+    PUSHBUTTON      "Del",IDC_DEL_RIGHT,233,62,25,14
+    PUSHBUTTON      "OK",IDOK,208,82,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_NESTERICON          ICON    DISCARDABLE     "res\\nester.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_HELP_ABOUT, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 70
+    END
+
+    IDD_OPTIONS_GRAPHICS, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+    END
+
+    IDD_OPTIONS_KEYPRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 61
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_OPTIONS_PREFERENCES, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+    END
+
+    IDD_OPTIONS_SOUND, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        BOTTOMMARGIN, 96
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCEL ACCELERATORS DISCARDABLE 
+BEGIN
+    "L",            IDM_FILE_LOAD_STATE,    VIRTKEY, CONTROL, NOINVERT
+    "L",            IDM_FILE_QUICK_LOAD,    VIRTKEY, SHIFT, NOINVERT
+    "O",            IDM_FILE_OPEN,          VIRTKEY, CONTROL, NOINVERT
+    "Q",            IDM_FILE_EXIT,          VIRTKEY, CONTROL, NOINVERT
+    "R",            IDM_FILE_RESET,         VIRTKEY, CONTROL, NOINVERT
+    "S",            IDM_FILE_SAVE_STATE,    VIRTKEY, CONTROL, NOINVERT
+    "S",            IDM_FILE_QUICK_SAVE,    VIRTKEY, SHIFT, NOINVERT
+    VK_ESCAPE,      ID_KEY_PAUSE,           VIRTKEY, NOINVERT
+    VK_ESCAPE,      IDM_FILE_RESUME,        VIRTKEY, SHIFT, NOINVERT
+END
+
+#endif    // Japanese resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

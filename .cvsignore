@@ -1,0 +1,11 @@
+ARM*
+MIPS*
+SH3*
+X86*
+gx
+html
+*.rar
+*.zip
+*.bak *.*~
+*.vcl *.vcb *.vco *.aps
+
