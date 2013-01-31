@@ -1,0 +1,11 @@
+--- C:/Users/Star/AppData/Local/Temp/Makefile-rev4.svn001.tmp	Wed May 18 15:32:43 2011
++++ C:/Users/Star/AppData/Local/Temp/Makefile-rev5.svn001.tmp	Tue May 24 15:41:27 2011
+@@ -8,7 +8,7 @@
+ include $(TOP)/build/Makefile.inc
+ 
+ JAVA          = java
+-JAVAC         = javac
++JAVAC         = javac -source 1.4
+ JAR           = jar
+ 
+ JAVAFILES =  $(shell find src -name "*.java"|grep -v SCCS)
