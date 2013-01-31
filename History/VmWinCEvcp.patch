@@ -1,0 +1,2695 @@
+--- C:/Users/Star/AppData/Local/Temp/VmWinCE.vcp-rev3.svn000.tmp.vcp	Wed May 18 15:32:43 2011
++++ C:/Users/Star/AppData/Local/Temp/VmWinCE.vcp-rev4.svn000.tmp.vcp	Tue May 24 14:39:20 2011
+@@ -4,6 +4,7 @@
+ 
+ # TARGTYPE "Win32 (WCE ARM) Application" 0x8501
+ # TARGTYPE "Win32 (WCE x86em) Application" 0x7f01
++# TARGTYPE "Win32 (WCE MIPSII) Application" 0xa101
+ 
+ CFG=VmWinCE - Win32 (WCE ARM) Debug
+ !MESSAGE This is not a valid makefile. To build this project using NMAKE,
+@@ -22,6 +23,8 @@
+ !MESSAGE "VmWinCE - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Application")
+ !MESSAGE "VmWinCE - Win32 (WCE x86em) Release" (based on "Win32 (WCE x86em) Application")
+ !MESSAGE "VmWinCE - Win32 (WCE x86em) Debug" (based on "Win32 (WCE x86em) Application")
++!MESSAGE "VmWinCE - Win32 (WCE MIPSII) Debug" (based on "Win32 (WCE MIPSII) Application")
++!MESSAGE "VmWinCE - Win32 (WCE MIPSII) Release" (based on "Win32 (WCE MIPSII) Application")
+ !MESSAGE 
+ 
+ # Begin Project
+@@ -119,7 +122,7 @@
+ # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "_X86_" /d "x86" /d "i486" /r
+ CPP=cl.exe
+ # ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "$(CePlatform)" /D "i486" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /YX /Gz /Oxs /c
+-# ADD CPP /nologo /O2 /I "..\..\VmWinCE\h" /I "..\..\VmWin\h" /I "..\..\VmCommon\h" /I "..\..\VmExtra\h" /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "i486" /D "_X86_" /D "x86" /D "NDEBUG" /D ALTERNATIVE_FAST_INTERPRETER=0 /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC" /D NOGUI=1 /YX /Gz /Oxs /c
++# ADD CPP /nologo /I "..\..\VmWinCE\h" /I "..\..\VmWin\h" /I "..\..\VmCommon\h" /I "..\..\VmExtra\h" /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "i486" /D "_X86_" /D "x86" /D "NDEBUG" /D ALTERNATIVE_FAST_INTERPRETER=0 /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /D "POCKETPC" /D NOGUI=1 /YX /Gz /Oxs /c
+ MTL=midl.exe
+ # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+ # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+@@ -164,6 +167,70 @@
+ # ADD BASE LINK32 commctrl.lib coredll.lib $(CEx86Corelibc) aygshell.lib /nologo /stack:0x10000,0x1000 /subsystem:windows /debug /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /windowsce:emulation /MACHINE:IX86
+ # ADD LINK32 $(CEx86Corelibc) winsock.lib commctrl.lib coredll.lib aygshell.lib /nologo /stack:0x10000,0x1000 /subsystem:windows /debug /nodefaultlib:"OLDNAMES.lib" /nodefaultlib:$(CENoDefaultLib) /windowsce:emulation /MACHINE:IX86
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++# PROP BASE Use_MFC 0
++# PROP BASE Use_Debug_Libraries 1
++# PROP BASE Output_Dir "MIPSIIDbg"
++# PROP BASE Intermediate_Dir "MIPSIIDbg"
++# PROP BASE CPU_ID "{689DDC64-9D9D-11D5-96F8-00207802C01C}"
++# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
++# PROP BASE Target_Dir ""
++# PROP Use_MFC 0
++# PROP Use_Debug_Libraries 1
++# PROP Output_Dir "MIPSIIDbg"
++# PROP Intermediate_Dir "MIPSIIDbg"
++# PROP CPU_ID "{689DDC64-9D9D-11D5-96F8-00207802C01C}"
++# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
++# PROP Target_Dir ""
++RSC=rc.exe
++# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "MIPS" /d "_MIPS_" /d "R4000" /d "MIPSII" /r
++# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "MIPS" /d "_MIPS_" /d "R4000" /d "MIPSII" /r
++CPP=clmips.exe
++# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "MIPS" /D "_MIPS_" /D "R4000" /D "MIPSII" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /QMmips2 /QMFPE /M$(CECrtMTDebug) /c
++# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "MIPS" /D "_MIPS_" /D "R4000" /D "MIPSII" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /QMmips2 /QMFPE /M$(CECrtMTDebug) /c
++MTL=midl.exe
++# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
++# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
++BSC32=bscmake.exe
++# ADD BASE BSC32 /nologo
++# ADD BSC32 /nologo
++LINK32=link.exe
++# ADD BASE LINK32 commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /MACHINE:MIPS
++# ADD LINK32 commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /MACHINE:MIPS
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++# PROP BASE Use_MFC 0
++# PROP BASE Use_Debug_Libraries 0
++# PROP BASE Output_Dir "MIPSIIRel"
++# PROP BASE Intermediate_Dir "MIPSIIRel"
++# PROP BASE CPU_ID "{689DDC64-9D9D-11D5-96F8-00207802C01C}"
++# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
++# PROP BASE Target_Dir ""
++# PROP Use_MFC 0
++# PROP Use_Debug_Libraries 0
++# PROP Output_Dir "MIPSIIRel"
++# PROP Intermediate_Dir "MIPSIIRel"
++# PROP CPU_ID "{689DDC64-9D9D-11D5-96F8-00207802C01C}"
++# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
++# PROP Target_Dir ""
++RSC=rc.exe
++# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "MIPS" /d "_MIPS_" /d "R4000" /d "MIPSII" /r
++# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "MIPS" /d "_MIPS_" /d "R4000" /d "MIPSII" /r
++CPP=clmips.exe
++# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D "R4000" /D "MIPSII" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /YX /QMmips2 /QMFPE /O2 /M$(CECrtMT) /c
++# ADD CPP /nologo /W3 /I "..\..\VmWinCE\h" /I "..\..\VmWin\h" /I "..\..\VmCommon\h" /I "..\..\VmExtra\h" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D "R4000" /D "MIPSII" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D USE_KNI=1 /D "POCKETPC" /D NOGUI=1 /YX /QMmips2 /QMFPE /O2 /M$(CECrtMT) /c
++MTL=midl.exe
++# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
++# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
++BSC32=bscmake.exe
++# ADD BASE BSC32 /nologo
++# ADD BSC32 /nologo
++LINK32=link.exe
++# ADD BASE LINK32 commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /MACHINE:MIPS
++# ADD LINK32 commctrl.lib coredll.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /MACHINE:MIPS
++
+ !ENDIF 
+ 
+ # Begin Target
+@@ -172,6 +239,8 @@
+ # Name "VmWinCE - Win32 (WCE ARM) Debug"
+ # Name "VmWinCE - Win32 (WCE x86em) Release"
+ # Name "VmWinCE - Win32 (WCE x86em) Debug"
++# Name "VmWinCE - Win32 (WCE MIPSII) Debug"
++# Name "VmWinCE - Win32 (WCE MIPSII) Release"
+ # Begin Group "Source Files"
+ 
+ # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+@@ -295,6 +364,37 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_ASYNC=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\async.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -414,6 +514,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_CACHE=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -533,6 +663,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_CLASS=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -656,6 +816,37 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_COLLE=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\async.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -779,6 +970,37 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_DEBUG=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerCommands.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -898,6 +1120,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_DEBUGG=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1017,6 +1269,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_DEBUGGE=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1136,6 +1418,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_DEBUGGER=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1255,6 +1567,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_EVENT=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1382,6 +1724,18 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++DEP_CPP_EXECU=\
++	"..\..\VmCommon\src\bytecodes.c"\
++	
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_EXECU=\
++	"..\..\VmCommon\src\bytecodes.c"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1501,6 +1855,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_FIELD=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1620,6 +2004,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_FP_MA=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1739,6 +2153,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_FRAME=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1858,6 +2302,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_GARBA=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -1977,6 +2451,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_GLOBA=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2096,6 +2600,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_HASHT=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2227,6 +2761,40 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_INFLA=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\..\VmExtra\h\inflate.h"\
++	"..\..\VmExtra\h\inflateint.h"\
++	"..\..\VmExtra\h\inflatetables.h"\
++	"..\..\VmExtra\h\jar.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2346,6 +2914,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_INTER=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2473,6 +3071,38 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_JAR_C=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\..\VmExtra\h\inflate.h"\
++	"..\..\VmExtra\h\jar.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2596,6 +3226,37 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_KNI_C=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\kni.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2719,6 +3380,18 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++DEP_CPP_KVMUT=\
++	"..\src\resource.h"\
++	
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_KVMUT=\
++	"..\src\resource.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2734,6 +3407,10 @@
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2853,6 +3530,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_LOADE=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -2976,6 +3683,37 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_LOADER=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\..\VmExtra\h\jar.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3095,6 +3833,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_LOG_C=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3222,6 +3990,38 @@
+ 	"..\h\wince_io.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_MAIN_=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\kvmutil.h"\
++	"..\h\machine_md.h"\
++	"..\h\wince_io.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3341,6 +4141,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_NATIV=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3460,6 +4290,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_NATIVE=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3579,6 +4439,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_NATIVEF=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3698,6 +4588,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_POOL_=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3817,6 +4737,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_PROFI=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -3936,6 +4886,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_PROPE=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -4055,6 +5035,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_RESOU=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -4178,6 +5188,41 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++NODEP_CPP_ROMJA=\
++	"..\..\..\tools\jcc\rom.h"\
++	
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_ROMJA=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\rom.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -4213,6 +5258,15 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_RUNTI=\
++	"..\..\VmCommon\h\main.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -4336,16 +5390,11 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
+-# End Source File
+-# Begin Source File
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
+ 
+-SOURCE=..\..\VmExtra\src\socketProtocol.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+-DEP_CPP_SOCKE=\
++DEP_CPP_RUNTIM=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4372,38 +5421,16 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ENDIF 
+ 
+-DEP_CPP_SOCKE=\
+-	"..\..\VmCommon\h\cache.h"\
+-	"..\..\VmCommon\h\class.h"\
+-	"..\..\VmCommon\h\events.h"\
+-	"..\..\VmCommon\h\fields.h"\
+-	"..\..\VmCommon\h\fp_math.h"\
+-	"..\..\VmCommon\h\garbage.h"\
+-	"..\..\VmCommon\h\global.h"\
+-	"..\..\VmCommon\h\hashtable.h"\
+-	"..\..\VmCommon\h\interpret.h"\
+-	"..\..\VmCommon\h\loader.h"\
+-	"..\..\VmCommon\h\log.h"\
+-	"..\..\VmCommon\h\long.h"\
+-	"..\..\VmCommon\h\main.h"\
+-	"..\..\VmCommon\h\messages.h"\
+-	"..\..\VmCommon\h\pool.h"\
+-	"..\..\VmCommon\h\profiling.h"\
+-	"..\..\VmCommon\h\property.h"\
+-	"..\..\VmCommon\h\runtime.h"\
+-	"..\..\VmCommon\h\thread.h"\
+-	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmExtra\h\async.h"\
+-	"..\..\VmExtra\h\debugger.h"\
+-	"..\..\VmExtra\h\debuggerStreams.h"\
+-	"..\h\machine_md.h"\
+-	
++# End Source File
++# Begin Source File
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++SOURCE=..\..\VmCommon\src\stackmap.c
+ 
+-DEP_CPP_SOCKE=\
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_STACK=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4424,15 +5451,14 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmExtra\h\async.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-DEP_CPP_SOCKE=\
++DEP_CPP_STACK=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4453,22 +5479,14 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmExtra\h\async.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\..\VmWin\src\socketProtocol_md.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+-DEP_CPP_SOCKET=\
++DEP_CPP_STACK=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4489,15 +5507,14 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmExtra\h\async.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+-DEP_CPP_SOCKET=\
++DEP_CPP_STACK=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4518,15 +5535,16 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmExtra\h\async.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
+-DEP_CPP_SOCKET=\
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_STACK=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4547,15 +5565,21 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmExtra\h\async.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ENDIF 
+ 
+-DEP_CPP_SOCKET=\
++# End Source File
++# Begin Source File
++
++SOURCE=..\..\VmCommon\src\StartJVM.c
++
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_START=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4576,22 +5600,14 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmExtra\h\async.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\..\VmCommon\src\stackmap.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+-DEP_CPP_STACK=\
++DEP_CPP_START=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4617,9 +5633,9 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-DEP_CPP_STACK=\
++DEP_CPP_START=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4645,9 +5661,9 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+-DEP_CPP_STACK=\
++DEP_CPP_START=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4673,9 +5689,11 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
+-DEP_CPP_STACK=\
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_START=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -4706,14 +5724,15 @@
+ # End Source File
+ # Begin Source File
+ 
+-SOURCE=..\..\VmCommon\src\StartJVM.c
++SOURCE=..\..\VmCommon\src\thread.c
+ 
+ !IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+ 
+-DEP_CPP_START=\
++DEP_CPP_THREA=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\execute.h"\
+ 	"..\..\VmCommon\h\fields.h"\
+ 	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+@@ -4738,10 +5757,11 @@
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-DEP_CPP_START=\
++DEP_CPP_THREA=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\execute.h"\
+ 	"..\..\VmCommon\h\fields.h"\
+ 	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+@@ -4766,10 +5786,11 @@
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-DEP_CPP_START=\
++DEP_CPP_THREA=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\execute.h"\
+ 	"..\..\VmCommon\h\fields.h"\
+ 	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+@@ -4794,10 +5815,11 @@
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+-DEP_CPP_START=\
++DEP_CPP_THREA=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\execute.h"\
+ 	"..\..\VmCommon\h\fields.h"\
+ 	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+@@ -4820,15 +5842,10 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
+-# End Source File
+-# Begin Source File
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
+ 
+-SOURCE=..\..\VmCommon\src\thread.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_THREA=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -4856,13 +5873,19 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ENDIF 
+ 
+-DEP_CPP_THREA=\
++# End Source File
++# Begin Source File
++
++SOURCE=..\..\VmCommon\src\verifier.c
++
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_VERIF=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+-	"..\..\VmCommon\h\execute.h"\
+ 	"..\..\VmCommon\h\fields.h"\
+ 	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+@@ -4880,18 +5903,18 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmCommon\h\verifierUtil.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-DEP_CPP_THREA=\
++DEP_CPP_VERIF=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+-	"..\..\VmCommon\h\execute.h"\
+ 	"..\..\VmCommon\h\fields.h"\
+ 	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+@@ -4909,18 +5932,18 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmCommon\h\verifierUtil.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-DEP_CPP_THREA=\
++DEP_CPP_VERIF=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+-	"..\..\VmCommon\h\execute.h"\
+ 	"..\..\VmCommon\h\fields.h"\
+ 	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+@@ -4938,20 +5961,14 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmCommon\h\verifierUtil.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\..\VmCommon\src\verifier.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_VERIF=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -4979,8 +5996,14 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
++NODEP_CPP_VERIF=\
++	"..\..\VmCommon\src\verifierUtil.h"\
++	
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ DEP_CPP_VERIF=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5008,9 +6031,16 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ENDIF 
+ 
+-DEP_CPP_VERIF=\
++# End Source File
++# Begin Source File
++
++SOURCE=..\..\VmCommon\src\verifierUtil.c
++
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_VERIFI=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5037,9 +6067,9 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-DEP_CPP_VERIF=\
++DEP_CPP_VERIFI=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5066,15 +6096,8 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\..\VmCommon\src\verifierUtil.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_VERIFI=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5102,7 +6125,7 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+ DEP_CPP_VERIFI=\
+ 	"..\..\VmCommon\h\cache.h"\
+@@ -5131,8 +6154,14 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
++NODEP_CPP_VERIFI=\
++	"..\..\VmCommon\src\verifierUtil.h"\
++	
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ DEP_CPP_VERIFI=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5160,9 +6189,16 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ENDIF 
+ 
+-DEP_CPP_VERIFI=\
++# End Source File
++# Begin Source File
++
++SOURCE=..\src\wince_io.c
++
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_WINCE=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5183,21 +6219,14 @@
+ 	"..\..\VmCommon\h\runtime.h"\
+ 	"..\..\VmCommon\h\thread.h"\
+ 	"..\..\VmCommon\h\verifier.h"\
+-	"..\..\VmCommon\h\verifierUtil.h"\
+ 	"..\..\VmExtra\h\debugger.h"\
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
++	"..\h\wince_io.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\src\wince_io.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_WINCE=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5225,7 +6254,7 @@
+ 	"..\h\wince_io.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+ DEP_CPP_WINCE=\
+ 	"..\..\VmCommon\h\cache.h"\
+@@ -5254,7 +6283,7 @@
+ 	"..\h\wince_io.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+ DEP_CPP_WINCE=\
+ 	"..\..\VmCommon\h\cache.h"\
+@@ -5283,8 +6312,10 @@
+ 	"..\h\wince_io.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ DEP_CPP_WINCE=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5334,47 +6365,14 @@
+ # Begin Source File
+ 
+ SOURCE=..\..\VmExtra\h\debugger.h
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+-
+-!ENDIF 
+-
+ # End Source File
+ # Begin Source File
+ 
+ SOURCE=..\..\VmExtra\h\debuggerCommands.h
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+-
+-!ENDIF 
+-
+ # End Source File
+ # Begin Source File
+ 
+ SOURCE=..\..\VmExtra\h\debuggerStreams.h
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+-
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+-
+-!ENDIF 
+-
+ # End Source File
+ # Begin Source File
+ 
+@@ -5524,21 +6522,29 @@
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ !ENDIF 
+ 
+ # End Source File
++# End Group
++# Begin Group "Floating Point"
++
++# PROP Default_Filter ""
+ # Begin Source File
+ 
+-SOURCE=..\..\VmExtra\src\sarm\FastInterpretAux.c
++SOURCE=..\..\VmExtra\src\fp\e_rem_pio2.c
+ 
+ !IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+ 
+-# PROP Exclude_From_Build 1
+-DEP_CPP_FASTI=\
++DEP_CPP_E_REM=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+ 	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
+ 	"..\..\VmCommon\h\garbage.h"\
+ 	"..\..\VmCommon\h\global.h"\
+ 	"..\..\VmCommon\h\hashtable.h"\
+@@ -5558,10 +6564,11 @@
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
++# ADD CPP /Od
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-DEP_CPP_FASTI=\
++DEP_CPP_E_REM=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5589,7 +6596,7 @@
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-DEP_CPP_FASTI=\
++DEP_CPP_E_REM=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5617,7 +6624,7 @@
+ 
+ !ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+-DEP_CPP_FASTI=\
++DEP_CPP_E_REM=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5643,19 +6650,10 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
+-# End Source File
+-# End Group
+-# Begin Group "Floating Point"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
+ 
+-# PROP Default_Filter ""
+-# Begin Source File
+-
+-SOURCE=..\..\VmExtra\src\fp\e_rem_pio2.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_E_REM=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5681,11 +6679,17 @@
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+-# ADD CPP /Od
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ENDIF 
+ 
+-DEP_CPP_E_REM=\
++# End Source File
++# Begin Source File
++
++SOURCE=..\..\VmExtra\src\fp\e_sqrt.c
++
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_E_SQR=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5710,10 +6714,11 @@
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
++# ADD CPP /Od
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-DEP_CPP_E_REM=\
++DEP_CPP_E_SQR=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5739,9 +6744,9 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-DEP_CPP_E_REM=\
++DEP_CPP_E_SQR=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5767,15 +6772,8 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\..\VmExtra\src\fp\e_sqrt.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_E_SQR=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5801,10 +6799,11 @@
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+-# ADD CPP /Od
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ DEP_CPP_E_SQR=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5831,9 +6830,16 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ENDIF 
+ 
+-DEP_CPP_E_SQR=\
++# End Source File
++# Begin Source File
++
++SOURCE=..\..\VmExtra\src\fp\fp_bytecodes.c
++
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_FP_BY=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5859,9 +6865,9 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-DEP_CPP_E_SQR=\
++DEP_CPP_FP_BY=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -5887,15 +6893,8 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\..\VmExtra\src\fp\fp_bytecodes.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_FP_BY=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5922,7 +6921,7 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+ DEP_CPP_FP_BY=\
+ 	"..\..\VmCommon\h\cache.h"\
+@@ -5950,8 +6949,10 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ DEP_CPP_FP_BY=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -5978,9 +6979,16 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ENDIF 
+ 
+-DEP_CPP_FP_BY=\
++# End Source File
++# Begin Source File
++
++SOURCE=..\..\VmExtra\src\fp\k_cos.c
++
++!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
++
++DEP_CPP_K_COS=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+ 	"..\..\VmCommon\h\events.h"\
+@@ -6005,16 +7013,10 @@
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
++# ADD CPP /Od
+ 
+-!ENDIF 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
+ 
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=..\..\VmExtra\src\fp\k_cos.c
+-
+-!IF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Release"
+-
+ DEP_CPP_K_COS=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -6040,9 +7042,8 @@
+ 	"..\..\VmExtra\h\debuggerStreams.h"\
+ 	"..\h\machine_md.h"\
+ 	
+-# ADD CPP /Od
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE ARM) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
+ 
+ DEP_CPP_K_COS=\
+ 	"..\..\VmCommon\h\cache.h"\
+@@ -6070,7 +7071,7 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Release"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
+ 
+ DEP_CPP_K_COS=\
+ 	"..\..\VmCommon\h\cache.h"\
+@@ -6098,8 +7099,10 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
+-!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE x86em) Debug"
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
+ DEP_CPP_K_COS=\
+ 	"..\..\VmCommon\h\cache.h"\
+ 	"..\..\VmCommon\h\class.h"\
+@@ -6246,6 +7249,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_K_REM=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -6366,6 +7399,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_K_SIN=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -6486,6 +7549,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_K_TAN=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -6606,6 +7699,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_CEI=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -6726,6 +7849,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_COP=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -6846,6 +7999,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_COS=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -6966,6 +8149,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_FAB=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -7086,6 +8299,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_FLO=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -7206,6 +8449,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_SCA=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -7326,6 +8599,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_SIN=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -7446,6 +8749,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_S_TAN=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
+@@ -7566,6 +8899,36 @@
+ 	"..\h\machine_md.h"\
+ 	
+ 
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Debug"
++
++!ELSEIF  "$(CFG)" == "VmWinCE - Win32 (WCE MIPSII) Release"
++
++DEP_CPP_W_SQR=\
++	"..\..\VmCommon\h\cache.h"\
++	"..\..\VmCommon\h\class.h"\
++	"..\..\VmCommon\h\events.h"\
++	"..\..\VmCommon\h\fields.h"\
++	"..\..\VmCommon\h\fp_math.h"\
++	"..\..\VmCommon\h\garbage.h"\
++	"..\..\VmCommon\h\global.h"\
++	"..\..\VmCommon\h\hashtable.h"\
++	"..\..\VmCommon\h\interpret.h"\
++	"..\..\VmCommon\h\loader.h"\
++	"..\..\VmCommon\h\log.h"\
++	"..\..\VmCommon\h\long.h"\
++	"..\..\VmCommon\h\main.h"\
++	"..\..\VmCommon\h\messages.h"\
++	"..\..\VmCommon\h\pool.h"\
++	"..\..\VmCommon\h\profiling.h"\
++	"..\..\VmCommon\h\property.h"\
++	"..\..\VmCommon\h\runtime.h"\
++	"..\..\VmCommon\h\thread.h"\
++	"..\..\VmCommon\h\verifier.h"\
++	"..\..\VmExtra\h\debugger.h"\
++	"..\..\VmExtra\h\debuggerStreams.h"\
++	"..\h\machine_md.h"\
++	
++
+ !ENDIF 
+ 
+ # End Source File
