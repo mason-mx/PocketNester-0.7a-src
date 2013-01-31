@@ -1,0 +1,11 @@
+--- C:/Users/Star/AppData/Local/Temp/Makefile-rev4.svn002.tmp	Wed May 18 15:32:43 2011
++++ C:/Users/Star/AppData/Local/Temp/Makefile-rev5.svn002.tmp	Tue May 24 15:41:27 2011
+@@ -13,7 +13,7 @@
+ DEBUGFLAG=":none"
+ endif
+ 
+-JAVAC     = javac
++JAVAC     = javac -source 1.4
+ 
+ ifneq ($(findstring win, $(PLATFORM)),)
+ PREVERIFY = ../tools/preverifier/build/$(PLATFORM)/preverify.exe
